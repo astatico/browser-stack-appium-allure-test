@@ -1,10 +1,16 @@
-package test.task.managers;
+package test.task.pages;
 
 import io.appium.java_client.pagefactory.AndroidFindBy;
+import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import io.qameta.allure.Step;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.PageFactory;
 
-public class AppStartConfiguration {
+import static test.task.managers.DriverManager.getDriver;
+import static test.task.managers.WebElementManager.click;
+import static test.task.managers.WebElementManager.waitFor;
+
+public class AppStartConfigurationPage extends BasePage {
 
     @AndroidFindBy(id = "imageViewCentered")
     private WebElement wikiLogo;
@@ -12,13 +18,19 @@ public class AppStartConfiguration {
     @AndroidFindBy(id = "fragment_onboarding_skip_button")
     private WebElement skipButton;
 
-    @Step("Ожидание появления страницы конфигурации")
-    private void waitUntilConfigurationPageAppear() {
-
+    public AppStartConfigurationPage() {
+        PageFactory.initElements(new AppiumFieldDecorator(getDriver()), this);
     }
 
-    @Step("Пропустить настройку языка")
-    public void skipConfiguration() {
-        skipButton.click();
+    @Step("Wait until configuration page is appear")
+    private void waitUntilPageLoaded() {
+        waitFor(wikiLogo);
+    }
+
+    @Step("Skip language settings")
+    public MainPage skipConfiguration() {
+        waitUntilPageLoaded();
+        click(skipButton);
+        return new MainPage();
     }
 }

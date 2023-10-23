@@ -1,10 +1,8 @@
-package test.task;
+package test.task.base;
 
-import io.qameta.allure.Step;
 import lombok.NoArgsConstructor;
 import org.junit.jupiter.api.*;
 import test.task.managers.DriverManager;
-import test.task.pages.AppStartConfigurationPage;
 
 @NoArgsConstructor
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)

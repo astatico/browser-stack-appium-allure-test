@@ -1,7 +1,5 @@
-userName: astatico_wsPeFE
-accessKey: QTgheAsnY2ryWheti1et
-framework: junit5
-app: bs://sample.app
+userName: *
+accessKey: *
 platforms:
   - platformName: android
     deviceName: Samsung Galaxy S22 Ultra

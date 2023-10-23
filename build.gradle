@@ -1,5 +1,7 @@
 plugins {
     id 'java'
+    id "io.qameta.allure" version "2.11.2"
+    id "io.freefair.lombok" version "6.6.1"
 }
 
 group = 'test.task'
@@ -10,8 +12,17 @@ repositories {
 }
 
 dependencies {
-    testImplementation platform('org.junit:junit-bom:5.9.1')
-    testImplementation 'org.junit.jupiter:junit-jupiter'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.0'
+    testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.9.0'
+    implementation 'commons-io:commons-io:2.11.0'
+    implementation 'io.appium:java-client:9.0.0'
+    implementation 'org.seleniumhq.selenium:selenium-java:4.0.0'
+    implementation 'com.googlecode.json-simple:json-simple:1.1.1'
+    implementation 'com.browserstack:browserstack-java-sdk:1.11.5'
+    implementation 'org.yaml:snakeyaml:2.2'
+    implementation 'org.projectlombok:lombok:1.18.16'
+    annotationProcessor 'org.projectlombok:lombok:1.18.16'
+    testImplementation 'io.qameta.allure:allure-java-commons:2.24.0'
 }
 
 test {

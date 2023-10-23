@@ -1,35 +1,35 @@
 package test.task;
 
-import io.appium.java_client.AppiumBy;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import test.task.base.BaseTest;
+import test.task.pages.AppStartConfigurationPage;
+import test.task.pages.ArticlePage;
+import test.task.pages.MainPage;
+import test.task.pages.SearchPage;
 
-import java.time.Duration;
-import java.util.List;
+public class WikipediaTest extends BaseTest {
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
+    private static final String ARTICLE_NAME = "123rd Airlift Wing";
 
-public class FacebookTest extends BaseTest {
+    private final AppStartConfigurationPage appStartConfigurationPage = new AppStartConfigurationPage();
+    private final SearchPage searchPage = new SearchPage();
+    private final ArticlePage articlePage = new ArticlePage();
 
-    @Test
-    void test() throws InterruptedException {
-        WebElement searchElement = new WebDriverWait(driver, Duration.ofSeconds(30)).until(ExpectedConditions.elementToBeClickable(AppiumBy.accessibilityId("Search Wikipedia")));
-        searchElement.click();
+    private MainPage mainPage;
 
-        WebElement insertTextElement = new WebDriverWait(driver, Duration.ofSeconds(30)).until(ExpectedConditions.elementToBeClickable(AppiumBy.id("org.wikipedia.alpha:id/search_src_text")));
-        insertTextElement.sendKeys("BrowserStack");
-
-        Thread.sleep(5000);
-
-        List<WebElement> allProductsName = driver.findElements(AppiumBy.className("android.widget.TextView"));
-        assertFalse(allProductsName.isEmpty());
+    @BeforeAll
+    void skipConfig() {
+        mainPage = appStartConfigurationPage.skipConfiguration();
     }
 
     @Test
-    void test2() {
-
+    @DisplayName("Verify an article found after searching it")
+    void verifyArticleFoundAfterSearchingIt() {
+        mainPage.selectSearchField();
+        searchPage.inputTextToSearchField("123");
+        searchPage.chooseTopic(ARTICLE_NAME);
+        articlePage.verifyArticleOpened(ARTICLE_NAME);
     }
 }
